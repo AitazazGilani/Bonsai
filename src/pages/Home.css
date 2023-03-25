@@ -1,5 +1,6 @@
-.App {
+.home {
   text-align: center;
+  background-image: '../pages/backgrounds/background1.png'
 }
 
 .App-logo {
@@ -7,7 +8,7 @@
   pointer-events: none;
 }
 
-.App-header {
+.home-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;

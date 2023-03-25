@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './pages/App';
-import navBar from './components/navBar'
+import App from './pages/Home';
+import NavigationBar from './components/NavigationBar'
 import { StyledEngineProvider } from '@mui/material/styles';
 
 //import reportWebVitals from './reportWebVitals';
@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
-      <navBar />
+      <NavigationBar />
     </StyledEngineProvider>
     <App />
   </React.StrictMode>
