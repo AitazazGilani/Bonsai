@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+
+
+ node-server:
+  image: node:latest
+  container_name: server
+  environment:
+   DB_HOST: mysql1
+   DB_PORT: 3306
+   DB_USER: root
+   DB_PASSWORD: admin
+  ports:
+   - "80:8080"
+  command: ["bin/bash"]
+  volumes:
+   - ./:/usr/src/app
+  depends_on:
+   - mysql-database
+  stdin_open: true
+  tty: true
+
+
+ react-container:
+  image: node:latest
+  container_name: react-app
+  ports:
+   - "81:8080"
+  command: ["bin/bash"]
+  volumes:
+   - ./:/usr/src/app
+  depends_on:
+   - node-server
+  stdin_open: true
+  tty: true
+
+
+ mysql-database:
+  image: mysql:5.7
+  platform: linux/amd64
+  restart: always
+  container_name: mysql-db
+  environment:
+   - MYSQL_ROOT_PASSWORD=admin
+  ports:
+   - '3306:3306'
+  volumes:
+   - ./database/db:/var/lib/mysql
+  stdin_open: true
+  tty: true
+volumes: 
+  db:
+     driver: local
+    
