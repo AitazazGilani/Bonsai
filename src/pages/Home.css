@@ -1,5 +1,4 @@
 .home {
-  text-align: center;
   background-image: url("../../public/backgrounds/background1.png");
   background-position: center;
   background-repeat: no-repeat;
@@ -20,6 +19,15 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.paragraph{
+  text-align: center;
+  max-width: 800px;
+}
+
+.background-setting {
+  object-fit: cover ;
 }
 
 .App-link {

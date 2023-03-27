@@ -16,7 +16,6 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const pages = ['Docs', 'Overview', 'Github'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-const buttons = ['Sign in']
 
 
 const appBarTheme = createTheme({
