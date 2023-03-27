@@ -3,9 +3,10 @@ import './Home.css';
 function App() {
   return (
     <div className="home">
-      <header className="home-header">
+      <header >
       
       </header>
+
     </div>
   );
 }

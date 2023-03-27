@@ -1,6 +1,9 @@
 .home {
   text-align: center;
-  background-image: '../pages/backgrounds/background1.png'
+  background-image: url("../../public/backgrounds/background1.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .App-logo {

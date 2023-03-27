@@ -12,9 +12,21 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Docs', 'Overview', 'Github'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const buttons = ['Sign in']
+
+
+const appBarTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#01070d',
+    },
+  },
+});
+
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -36,7 +48,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" theme={appBarTheme}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -55,7 +67,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Bonsai
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -111,7 +123,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Bonsai
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -125,7 +137,22 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
+
+          <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}> 
+          <Button
+          variant="outlined"
+            sx={{ my: 2, color: 'white', display: 'block', mr:2 }}>
+              Log in
+            </Button>
+            <Button
+            variant="contained"
+            sx={{ my: 2, color: 'white', display: 'block', mr:2}}>
+              Get Started
+            </Button>
+          </Box>
+
           <Box sx={{ flexGrow: 0 }}>
+
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
