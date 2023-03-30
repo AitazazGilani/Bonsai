@@ -153,7 +153,6 @@ function ResponsiveAppBar() {
               Get Started
             </Button>
           </Box>
-
         </Toolbar>
       </Container>
     </AppBar>

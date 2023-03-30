@@ -1,14 +1,14 @@
-import './Home.css';
-import NavigationBar from '../components/NavigationBar'
+import './Landing.css';
+import NavigationBarUser from '../components/NavigationBarUser'
 
 function Home() {
   return (
     <div className="home">
-      <NavigationBar/>
+      <NavigationBarUser/>
       <header className='home-header'>
-        <h1 >Welcome to Bonsai </h1>
-        <p className='paragraph'>where your ideas can grow! share your passions, and be inspired. Join our community today and start planting the seeds of creativity in the world of tech!</p>
-      </header>
+        <h1 >Welcome User </h1>
+        <p className='paragraph'>You will find posts here</p>
+        </header>
 
     </div>
   );

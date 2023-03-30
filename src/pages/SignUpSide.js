@@ -26,7 +26,13 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#081C15',
+    },
+  },
+});
 
 export default function SignUpSide() {
   const handleSubmit = (event) => {
