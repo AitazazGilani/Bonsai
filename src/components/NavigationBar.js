@@ -46,6 +46,8 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+
+
   return (
     <AppBar position="static" theme={appBarTheme}>
       <Container maxWidth="xl">
@@ -139,6 +141,7 @@ function ResponsiveAppBar() {
 
           <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}> 
           <Button
+          href="/SignIn"
           variant="outlined"
             sx={{ my: 2, color: 'white', display: 'block', mr:2 }}>
               Log in

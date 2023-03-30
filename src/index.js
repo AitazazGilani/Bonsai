@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './pages/Home';
+import App from './App.js';
 import NavigationBar from './components/NavigationBar'
 import { StyledEngineProvider } from '@mui/material/styles';
 
@@ -10,9 +10,6 @@ import { StyledEngineProvider } from '@mui/material/styles';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <StyledEngineProvider injectFirst>
-      <NavigationBar />
-    </StyledEngineProvider>
     <App />
   </React.StrictMode>
 );
