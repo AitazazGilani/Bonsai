@@ -4,7 +4,9 @@ import SignInSide from './pages/SignInSide.js';
 import SignUpSide from './pages/SignUpSide.js';
 import Landing from './pages/Landing.js'
 import Home from './pages/Home.js'
-
+import AddMessage from './pages/AddMessage.js';
+import ExpandedMessage from './pages/ExpandedMessage.js';
+import MessageDetails from './pages/MessageDetails.js'
 function App() {
   return (
     <div>
@@ -14,6 +16,8 @@ function App() {
           <Route exact path='/SignIn' element={<SignInSide/>} />
           <Route exact path='/SignUp' element={<SignUpSide/>} />
           <Route exact path='/Home' element={<Home/>} />
+          <Route exact path='/AddMessage' element={<AddMessage/>} />
+          <Route exact path='/message/:id' element={<ExpandedMessage/>} />
           </Routes>
         </Router>
     </div>

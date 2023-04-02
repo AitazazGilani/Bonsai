@@ -7,24 +7,29 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import { Favorite, Reply } from '@mui/icons-material';
+import { useNavigate   } from 'react-router-dom';
 import { useState } from 'react';
 
 function MessageCard(props) {
-  const { title, message } = props;
-  const [likes, setLikes] = useState(0);
-  const [replies, setReplies] = useState(0);
-
+  const navigate = useNavigate();
+  const { messageID, title, message, likes, replies } = props;
+  
+  const handleClick = () =>{
+    console.log('Card Clicked');
+    console.log(messageID);
+  }
   const handleLike = () => {
-    setLikes(likes + 1);
+    console.log('like');
   };
 
   const handleReply = () => {
-    setReplies(replies + 1);
+    console.log(messageID);
+    navigate(`/message/${messageID}`)
   };
 
   return (
-    <Card sx={{ bgcolor: '#D8F3DC', marginBottom: '20px' }} variant="outlined">
-      <CardContent>
+    <Card sx={{ bgcolor: '#D8F3DC', marginBottom: '20px', boxShadow:3 }} variant="outlined">
+      <CardContent onClick={handleClick}>
         <Typography variant="h5" component="h2" sx={{ color: '#081C15' }}>
           {title}
         </Typography>
@@ -47,5 +52,7 @@ function MessageCard(props) {
     </Card>
   );
 }
+
+
 
 export default MessageCard;
