@@ -93,7 +93,26 @@ function Home() {
   }
 
   const sortItems  = (sortType) => {
-    console.log(sortType)
+    let sortedItems;
+    switch(sortType){
+      case "liked":
+        sortedItems = messages.slice().sort((a, b) => b.likes - a.likes);
+        break;
+      case "old":
+        sortedItems = messages.slice().sort((a, b) => a.id - b.id);
+        break;
+      case "new":
+        sortedItems = messages.slice().sort((a, b) => b.id - a.id);
+        break;
+      case "disliked":
+        sortedItems = messages.slice().sort((a, b) => b.dislikes - a.dislikes);
+        break;
+      default:
+        sortedItems = messages;
+        break;
+    }
+    setFilteredMessages(sortedItems);
+
   }
 
   return (
