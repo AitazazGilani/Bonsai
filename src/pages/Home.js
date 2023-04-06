@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import Container from '@mui/material/Container';
 import AddMessageFab from '../components/AddMessageFAB';
+import SortCard from '../components/SortCard';
 function Home() {
   const [messages, setMessages] = useState([
     {
@@ -91,6 +92,10 @@ function Home() {
     setFilteredMessages(filteredData);
   }
 
+  const sortItems  = (sortType) => {
+    console.log(sortType)
+  }
+
   return (
 
     <div className="home">
@@ -100,6 +105,7 @@ function Home() {
         <h1 >Welcome User </h1>
         <div>
         <Container maxWidth="sm">
+        <SortCard sortItems={sortItems}/>
       {filteredMessages.map(message => (
         <MessageCard
           key={message.id}
