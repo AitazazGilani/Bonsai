@@ -112,7 +112,6 @@ function Home() {
         break;
     }
     setFilteredMessages(sortedItems);
-
   }
 
   return (

@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import { Card, CardContent, Typography, Avatar } from '@mui/material';
 
 function SortCard(props) {
-  const [alignment, setAlignment] = useState('new');
+  const [alignment, setAlignment] = useState('old');
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
