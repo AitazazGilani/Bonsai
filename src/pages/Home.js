@@ -6,47 +6,74 @@ import { useState } from 'react';
 import Container from '@mui/material/Container';
 import AddMessageFab from '../components/AddMessageFAB';
 function Home() {
-  const messages =  [
+  const [messages, setMessages] = useState([
     {
       "id": 1,
       "title": "First message",
       "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "category": "Latin",
       "likes": 10,
-      "replies": 5
+      "dislikes": 1,
+      "replies": 5,
+      "username": "Monke"
     },
     {
       "id": 2,
       "title": "Second message",
       "content": "This is the second message.",
+      "category": "Sample",
       "likes": 15,
-      "replies": 3
+      "dislikes": 5,
+      "replies": 3,
+      "username": "Banana"
     },
     {
       "id": 3,
       "title": "Third message",
       "content": "This is the third message.",
+      "category": "something",
       "likes": 8,
-      "replies": 2
+      "dislikes": 2,
+      "replies": 2,
+      "username": "Caveman"
     }
-  ]
+  ]);
 
-  const replies = [
-    {
-      "replyID": 1,
-      "messageID":1,
-      "username": "RandomGuy",
-      "text": "I hate lorem ipsum"
-    },
-    {
-      "replyID": 2,
-      "messageID":1,
-      "username": "NotRandomGuy",
-      "text": "Me too, man cant think of anything original!"
-    }
-  ]
+  const [filteredMessages, setFilteredMessages] = useState([  {
+    "id": 1,
+    "title": "First message",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "category": "Latin",
+    "likes": 10,
+    "dislikes": 1,
+    "replies": 5,
+    "username": "Monke"
+  },
+  {
+    "id": 2,
+    "title": "Second message",
+    "content": "This is the second message.",
+    "category": "Sample",
+    "likes": 15,
+    "dislikes": 5,
+    "replies": 3,
+    "username": "Banana"
+  },
+  {
+    "id": 3,
+    "title": "Third message",
+    "content": "This is the third message.",
+    "category": "something",
+    "likes": 8,
+    "dislikes": 2,
+    "replies": 2,
+    "username": "Caveman"
+  }]);
+
+  
 
   /* const [messages, setMessages] = useState([]);
-
+      
   useEffect(() => {
     axios.get('/api/messages')
       .then(response => {
@@ -57,24 +84,33 @@ function Home() {
       });
   }, []); */
 
+  const handleSearch = (query) => {
+    console.log(query)
+    const filteredData = messages.filter(item => item.title.toLowerCase().includes(query.toLowerCase()) || item.category.toLowerCase().includes(query.toLowerCase()));
+    console.log(filteredData)
+    setFilteredMessages(filteredData);
+  }
 
   return (
 
     <div className="home">
-      <NavigationBarUser/>
+      <NavigationBarUser onSearch={handleSearch}/>
       <Container maxWidth="xl">
       <header className='home-header'>
         <h1 >Welcome User </h1>
         <div>
         <Container maxWidth="sm">
-      {messages.map(message => (
+      {filteredMessages.map(message => (
         <MessageCard
           key={message.id}
           messageID={message.id}
           title={message.title}
           message={message.content}
+          category={message.category}
           likes={message.likes}
+          dislikes={message.dislikes}
           replies={message.replies}
+          username={message.username}
         />
       ))}
         </Container>

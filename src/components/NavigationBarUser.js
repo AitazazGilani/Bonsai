@@ -13,8 +13,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import SearchBar from './SearchBar';
 
-const pages = ['Docs', 'Overview', 'Github'];
+const pages = [];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 
@@ -27,7 +28,7 @@ const appBarTheme = createTheme({
 });
 
 
-function ResponsiveAppBar() {
+function NavigationBarUser(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -45,8 +46,6 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-
 
   return (
     <AppBar position="static" theme={appBarTheme}>
@@ -126,6 +125,7 @@ function ResponsiveAppBar() {
           >
             Bonsai
           </Typography>
+          <SearchBar onSearch={props.onSearch}/>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -142,8 +142,8 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}> 
           <Button
           href="/SignIn"
-          variant="outlined"
-            sx={{ my: 2, color: 'white', display: 'block', mr:2, bgcolor: "red" }}>
+          variant="contained"
+            sx={{ my: 2, color: 'white', display: 'block', mr:2}}>
               Log Out
             </Button>
           </Box>
@@ -152,7 +152,7 @@ function ResponsiveAppBar() {
 
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -183,4 +183,4 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+export default NavigationBarUser;

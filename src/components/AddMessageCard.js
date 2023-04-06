@@ -9,17 +9,17 @@ function AddMessageCard() {
     const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [category, setCategory] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Do something with the title and content, like send them to a server
-    console.log(title);
-    console.log(content);
+    console.log(title,content,category);
     navigate("/home")
   };
 
   return (
-    <Card sx={{ bgcolor: '#D8F3DC', marginBottom: '20px' }} variant="outlined">
+    <Card sx={{ bgcolor: '#E8F8FF', marginBottom: '20px' }} variant="outlined">
       <CardContent>
         <form onSubmit={handleSubmit}>
           <TextField
@@ -29,7 +29,7 @@ function AddMessageCard() {
             margin="normal"
             variant="outlined"
             value={title}
-            sx={{ color: '#081C15' }}
+            sx={{ color: '#000000' }}
             onChange={(e) => setTitle(e.target.value)}
           />
           <TextField
@@ -41,8 +41,18 @@ function AddMessageCard() {
             multiline
             rows={4}
             value={content}
-            sx={{ color: '#081C15' }}
+            sx={{ color: '#000000' }}
             onChange={(e) => setContent(e.target.value)}
+          />
+           <TextField
+            required
+            fullWidth
+            label="Category"
+            margin="normal"
+            variant="outlined"
+            value={category}
+            sx={{ color: '#000000' }}
+            onChange={(e) => setCategory(e.target.value)}
           />
           <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button type="submit" variant="contained">

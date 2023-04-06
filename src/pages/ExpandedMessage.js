@@ -21,8 +21,11 @@ const message =
     "id": 1,
     "title": "First message",
     "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "category": "Latin",
     "likes": 10,
-    "replies": 5
+    "dislikes": 2,
+    "replies": 5,
+    "username": "Monke"
   }
 
   const replies = [
@@ -30,13 +33,19 @@ const message =
       "replyID": 1,
       "messageID":1,
       "username": "RandomGuy",
-      "text": "I hate lorem ipsum"
+      "text": "I hate lorem ipsum",
+      "likes": 0,
+      "dislikes": 666,
+      "replies": 2
     },
     {
       "replyID": 2,
       "messageID":1,
       "username": "NotRandomGuy",
-      "text": "Me too, man cant think of anything original!"
+      "text": "Me too, man cant think of anything original!",
+      "likes": 0,
+      "dislikes": 3123123,
+      "replies": 2
     }
   ]
 
@@ -66,7 +75,7 @@ const message =
     <div className="home">
       <NavigationBarUser/>
       <Container maxWidth="xl">
-      <header className='home-header'>
+      <header className='landing-header'>
 
         <div>
         <Container maxWidth="sm">
@@ -75,8 +84,10 @@ const message =
           messageID={message.id}
           title={message.title}
           message={message.content}
+          category={message.category}
           likes={message.likes}
           replies={message.replies}
+          username={message.username}
         />
         <AddReplyCard/>
          {replies.map((reply, index) => (

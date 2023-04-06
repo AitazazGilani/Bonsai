@@ -12,7 +12,7 @@ function AddMessage() {
     <div className="home">
       <NavigationBarUser/>
       <Container maxWidth="xl">
-      <header className='home-header'>
+      <header className='landing-header'>
 
         <div>
         <Container maxWidth="sm">

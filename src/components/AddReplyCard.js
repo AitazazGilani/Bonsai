@@ -15,7 +15,7 @@ function AddReplyCard() {
   };
 
   return (
-    <Card sx={{ display: 'flex', mb: 2 , bgcolor: '#D8F3DC'}}>
+    <Card sx={{ display: 'flex', mb: 2 , bgcolor: '#E8F8FF'}}>
       <Avatar sx={{ m: 1 }} />
       <form onSubmit={handleSubmit}>
       <CardContent sx={{ display: 'flex', flexDirection: 'row', flexGrow: 1 }}>
