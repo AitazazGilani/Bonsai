@@ -6,7 +6,7 @@ services:
   image: node:latest
   container_name: server
   environment:
-   DB_HOST: mysql1
+   DB_HOST: mysql-db
    DB_PORT: 3306
    DB_USER: root
    DB_PASSWORD: admin
