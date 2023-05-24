@@ -1,17 +1,34 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { Card, CardContent, Typography, Avatar } from '@mui/material';
+import axios from 'axios';
 
-function AddReplyCard() {
+function AddReplyCard(props) {
   const [content, setContent] = useState('');
-
+  const {message_id} = props;
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     // Do something with the content, send them to a server
+    // Do something with the title and content, like send them to a server
     console.log(content);
-    //navigate("/home")
+    axios.post('http://localhost:80/messages/' + message_id +'/replies', {
+        text: content,
+        username: 'user',
+        messageId: message_id
+      })
+      .then(response => {
+        console.log(response.data);
+      })
+      .then(navigate(0))
+      .catch(error => {
+        console.log(error);
+      });
+
+    
   };
 
   return (

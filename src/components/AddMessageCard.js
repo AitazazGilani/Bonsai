@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { useNavigate   } from 'react-router-dom';
+import axios from 'axios';
 function AddMessageCard() {
     const navigate = useNavigate();
   const [title, setTitle] = useState('');
@@ -15,6 +16,18 @@ function AddMessageCard() {
     e.preventDefault();
     // Do something with the title and content, like send them to a server
     console.log(title,content,category);
+    axios.post('http://localhost:80/messages/', {
+        title: title,
+        content: content,
+        category: category,
+        username: 'user'
+      })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
     navigate("/home")
   };
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -11,10 +11,32 @@ import Badge from '@mui/material/Badge';
 import { Favorite, Reply, HeartBroken } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import Chip from '@mui/material/Chip';
+import axios from 'axios';
 
 function MessageCard(props) {
   const navigate = useNavigate();
-  const { messageID, title, message, category, likes, dislikes, replies, username } = props;
+  const [likes,setLikes] = useState([]);
+  const [dislikes,setDislikes] = useState([]);
+  const { messageID, title, message, category, replies, username } = props;
+
+  useEffect(() => {
+    axios.get('http://localhost:80/messages/'+messageID+'/likes')
+      .then(response => {
+        setLikes(response.data.likesCount);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+      axios.get('http://localhost:80/messages/'+messageID+'/dislikes')
+      .then(response => {
+        setDislikes(response.data.dislikesCount);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []); 
+
 
   const handleClick = () =>{
     console.log('Card Clicked');
@@ -23,6 +45,17 @@ function MessageCard(props) {
 
   const handleLike = () => {
     console.log('like');
+    axios.put('http://localhost:80/messages/'+messageID+'/like', {
+      "userId":1
+    }).then(response => {
+      if(response.data.message === "Message liked successfully") setLikes(likes+1);
+      else setLikes(likes-1);
+      navigate(0);
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
   };
 
   const handleReply = () => {
@@ -32,6 +65,17 @@ function MessageCard(props) {
 
   const handleDislike = () => {
     console.log("disliked");
+    axios.put('http://localhost:80/messages/'+messageID+'/dislike', {
+      "userId":1
+    }).then(response => {
+      if(response.data.message === "Message disliked successfully") setDislikes(dislikes+1);
+      else setDislikes(likes-1);
+      navigate(0);
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
   };
 
   return (

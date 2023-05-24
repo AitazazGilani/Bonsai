@@ -12,13 +12,14 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import { useNavigate   } from 'react-router-dom';
+import axios from 'axios';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Bonsai
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -35,6 +36,7 @@ const theme = createTheme({
 });
 
 export default function SignUpSide() {
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -43,6 +45,16 @@ export default function SignUpSide() {
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    axios.post('http://localhost:80/signup', {
+      "email":data.get('email'),
+      "username":data.get('username'),
+      "password":data.get('password')
+    })
+    .then(response=>{
+      navigate("/Home");
+    })
+
   };
 
   return (

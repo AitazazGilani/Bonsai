@@ -13,13 +13,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate   } from 'react-router-dom';
-
+import axios from 'axios';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://localhost:8080/">
+        Bonsai
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -40,6 +40,18 @@ export default function SignInSide() {
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    axios.post('http://localhost:80/login', {
+      "email":data.get('email'),
+      "password":data.get('password')
+    })
+    .then(response=>{
+      if(response.status === "Success"){
+        navigate("/Home/"+response.userId);
+      }
+
+    })
+
     if(data.get('email') === 'user@user.com' && data.get('password')==='user123'){
       console.log("Authenticated!")
       navigate("/Home")

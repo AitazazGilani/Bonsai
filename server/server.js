@@ -114,7 +114,7 @@ app.post('/login', function(req, res) {
   
       // Check if there is a matching user in the database
       if (results.length > 0) {
-        res.status(200).json({ success: 'Login successful.' });
+        res.status(200).json({ userId: results[0].username, status:"success" });
       } else {
         res.status(401).json({ error: 'Invalid email or password.' });
       }
