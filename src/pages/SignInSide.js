@@ -46,16 +46,11 @@ export default function SignInSide() {
       "password":data.get('password')
     })
     .then(response=>{
-      if(response.status === "Success"){
-        navigate("/Home/"+response.userId);
+      if(response.status === 200){
+        navigate("/Home")
       }
 
     })
-
-    if(data.get('email') === 'user@user.com' && data.get('password')==='user123'){
-      console.log("Authenticated!")
-      navigate("/Home")
-    }
 
   };
 

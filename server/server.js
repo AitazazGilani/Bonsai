@@ -2,12 +2,20 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require("body-parser");
-
+const session = require('express-session')
 const app = express();
+const crypto = require('crypto');
+
+var passport = require('passport');
+var LocalStrategy = require('passport-local');
 
 // Allow cross-origin resource sharing (CORS)
 app.use(cors());
 app.use(express.json());
+app.use(session({ secret: 'your-secret-key', resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 //add body parser
 app.use( bodyParser.json());
@@ -30,6 +38,31 @@ connection.connect((err) => {
 connection.query(`USE postsDB`,function (error, results) {
     if (error) console.log(error);
 });
+
+
+
+passport.use(new LocalStrategy(  {
+  usernameField: 'email',
+  passwordField: 'password'
+},function verify(email, password, cb) {
+  connection.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], function(err, user) {
+    console.log(user);
+    if (err) { return cb(err); }
+    if (!user) { return cb(null, false, { message: 'Incorrect email or password.' }); }
+
+      return cb(null, user);
+
+  });
+}));
+
+passport.serializeUser( (userObj, done) => {
+  done(null, userObj)
+})
+
+passport.deserializeUser((userObj, done) => {
+  done (null, userObj )
+})
+
 app.get('/init', (req,res) => {
 
     connection.query(`CREATE DATABASE IF NOT EXISTS postsDB`,function (error,result) {
@@ -94,7 +127,7 @@ app.get('/init', (req,res) => {
 
     res.status(201).send("Created DB");
 });
-app.post('/login', function(req, res) {
+/* app.post('/login', function(req, res) {
     const email = req.body.email;
     const password = req.body.password;
   
@@ -121,7 +154,20 @@ app.post('/login', function(req, res) {
     });
   });
 
+ */
 
+  const checkAuthenticated = (req, res, next) => {
+    if (req.isAuthenticated()) { return next() }
+    res.redirect("/login")
+  }
+  app.post('/login', passport.authenticate('local'), (req, res) => {
+    res.status(200).json({ message: 'Logged in successfully' });
+  });
+  
+  app.get('/logout', (req, res) => {
+    req.logout();
+    res.json({ message: 'Logged out successfully' });
+  });
 
   app.post('/signup', function(req, res) {
     const email = req.body.email;
@@ -193,13 +239,15 @@ app.post('/login', function(req, res) {
     });
   });
   
+  //Todo: fix username field
   //POST a message
-  app.post('/messages', function(req, res) {
+  app.post('/messages',checkAuthenticated, function(req, res) {
     const title = req.body.title;
     const content = req.body.content;
     const category = req.body.category;
-    const username = req.body.username;
-  
+    const username = req.user.username;
+    console.log(req.user.username)
+
     connection.query('INSERT INTO messages (title, content, category, username) VALUES (?, ?, ?, ?)', [title, content, category, username], function(error, results, fields) {
       if (error) {
         console.log(error);

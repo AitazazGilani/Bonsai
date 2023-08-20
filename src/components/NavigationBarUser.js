@@ -14,7 +14,8 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import SearchBar from './SearchBar';
-
+import axios from 'axios';
+import { useNavigate   } from 'react-router-dom';
 const pages = [];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -31,6 +32,7 @@ const appBarTheme = createTheme({
 function NavigationBarUser(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -46,6 +48,16 @@ function NavigationBarUser(props) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogOut = () => {
+    axios.get('http://localhost:80/logout')
+    .then(response=>{
+      if(response.status === 200){
+        navigate("/Home")
+      }
+
+    })
+  }
 
   return (
     <AppBar position="static" theme={appBarTheme}>
@@ -141,7 +153,7 @@ function NavigationBarUser(props) {
 
           <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' } }}> 
           <Button
-          href="/SignIn"
+          onSubmit={handleLogOut}
           variant="contained"
             sx={{ my: 2, color: 'white', display: 'block', mr:2}}>
               Log Out
